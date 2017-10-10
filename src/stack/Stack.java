@@ -4,32 +4,27 @@ import java.util.*;
 
 public class Stack<T>{
 	private T type;
-	private Node node, nextNode;
+	private Node<T> top;
 	/*
 	 * METHODS
 	 * 
 	 */
 	public Stack() {
-		node = null;
+		top = null;
 	}
 
 	/** Inserts an element to the top of the stack */
 	public void push(T item) {
-		type = item;
-		nextNode = node;
-		node = new Node();
-		node.setValue(type);
-		node.setNext(nextNode);
+		Node<T> oldTop = top;
+		top = new Node<T>(item, oldTop);
 
 		// throws exception nullpointerexcept if its null
 	}
 
 	/** removes top most element */
 	public T pop() {
-		// throws emptystackexcept if stack is empty
-		node = nextNode;
-		
-		
+		type = top.getValue();
+		top = top.getNext();
 		return type;
 	}
 
@@ -41,9 +36,7 @@ public class Stack<T>{
 
 	/** checks if the stack is empty */
 	public boolean isEmpty() {
-		boolean isEmpty = false;
-		// true if stack is empty. false if it's not
-		return isEmpty;
+		return top == null;
 	}
 
 	public T getType() {
